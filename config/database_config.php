@@ -17,7 +17,7 @@ if(FALSE) {
     $db_config['host'] = "localhost";
     $db_config['database'] = "db61820282x";
     $db_config['username'] = "dbo61820282x";
-    $db_config['password'] = "Mmi1and1!";
+    $db_config['password'] = "";
     $db_config['port'] = 3306;
     $db_config['socket'] = "/tmp/mysql5.sock";
 }

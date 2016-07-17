@@ -11,6 +11,10 @@ require_once '../app/includes.php';
 
 
 /*
+ *
+ * EXAMPLE FORMAT
+ * THIS IS HOW THE MTConnect arrives after JSON decode
+ *
 Array
 (
     [_id] => Array
@@ -37,7 +41,14 @@ Array
     [mt_value] => 120000.0
     [virtual_flag] => N
 )
+ */
 
+
+/**
+ *
+ * THIS ARRAY (
+ *
+ * TODO - make this a class
  */
 $aid = array(
 //    'id' => '999',
