@@ -1,0 +1,72 @@
+
+.card {
+    border:1px solid #ccc;
+    padding:0.5em;
+    min-height: 280px;
+}
+
+.good{color:green;}
+.bad{color:red;}
+
+#is{
+/*display:none;*/
+}
+#bs{
+/*display:none;*/
+}
+
+#footer{
+background-color: #ccc;
+color:#666;
+width:100%;
+margin-top:1em;
+padding:.5em;
+padding-left:3em;
+}
+.title {
+background-color: #337ab7;;
+color:#fff;
+width:100%;
+padding:.2em;
+padding-left:.6em;
+font-size:3em;
+}
+.subtotal {
+border-top:1px solid #999;
+font-weight: bold;
+}
+.time {
+font-weight: bold;
+background-color: gainsboro;
+}
+table {
+/*font-size:< ?php echo $_SESSION['font']; ?>%;*/
+}
+.mytable{
+/*max-width:600px;*/
+}
+.mytable td {
+padding:6px;
+}
+.mybold {
+font-weight: bold;
+}
+.center {
+font-weight: bold;
+color:white;
+background-color: #337ab7;
+border-left:1px solid black;
+border-right:1px solid black;
+}
+.sumtotal {
+font-weight: bold;
+background-color: #eee;
+border-left:1px solid black;
+border-right:1px solid black;
+}
+.neg {
+color:red;
+}
+.lite {
+color:#ccc;
+}
