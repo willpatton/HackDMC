@@ -1,14 +1,18 @@
 <?php
-//controller.php
+/**
+ *
+ * controller.php
+ *
+ *
+ *
+ */
 
 $action = '';
-//$lines = 100; //600000
-//$count = 0;
-
-
 
 /**
- * ROUTES
+ *
+ * ROUTES, UI SESSION VARS
+ *
  */
 if(1){
 
@@ -42,7 +46,6 @@ if(1){
         $_SESSION['sort'] = 'ASC';
     }
     if(isset($_GET['sort']))  {
-        //$sort = filter_input(INPUT_GET,'sort', FILTER_SANITIZE_STRING);
         if('ASC' == $_SESSION['sort']){
             $_SESSION['sort'] = 'DESC';
         } else {
@@ -123,9 +126,6 @@ if(1){
     }
 
 
-
-
-
 //PREVNEXT
     if(!isset($_SESSION['prevnext'])) {
         $_SESSION['prevnext'] = 0;
@@ -183,23 +183,20 @@ if(1){
         else {$_SESSION['sum'] = 1 ;}
     }
 
-//
+//*****************
 //
 //OBJECTS  /  MODEL
 //
-//
+//*****************
 
-//SQL
+//SQL - database class
 $db = new \Dynamics\dbMySQLi($db_config);
+
+//The main table in the db
 $table = 'data';
 
 
-
-//RANGE
-//define('MIN', 0);
-
-
-//MONTHS
+//MONTHS - not used
     $months = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
     $months_rev = array_reverse($months);
     array_unshift($months, "Months");
@@ -207,7 +204,7 @@ $table = 'data';
 
 
 
-//FILE
+//FILE - hardcoded file I/O -  TODO - put a UI on this
     $filenamein  = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.json';
     $filenameout = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.csv';
 
