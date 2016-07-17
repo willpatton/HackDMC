@@ -278,7 +278,7 @@ require_once '../template/head.php';
 
         ?>
         <h1>Detail</h1>
-        <p><a href="../app/index.php?view=cards">Back</a></p>
+        <p><a href="../reports/Compare.php">Compare</a> | <a href="../app/index.php?view=cards">Back</a></p>
         <pre>
         <?php print_r($ar); ?>
         </pre>
@@ -290,9 +290,9 @@ require_once '../template/head.php';
     if($_SESSION['tab'] == 'report'){
         ?>
         <h1>Reports</h1>
-        <p><a href="../app/index.php">Back</a></p>
+        <p><a href="#alarms">Alarms</a> | <a href="#wattage">Wattage</a> | <a href="../reports/Compare.php">Compare</a> | <a href="../app/index.php">Back</a></p>
 
-        <div>
+        <div id="alarms">
             <h2>Machine Status</h2>
             <?php require_once '../reports/Include_Plots/Status.html'; ?>
             <br>
@@ -302,7 +302,7 @@ require_once '../template/head.php';
         </div>
 
 
-        <div>
+        <div id="wattage">
             <h2>Factory Wattage</h2>
             <img src="../reports/img/Percentage%20of%20watt%20factory.png" alt="Factory Wattage"  style="width:1000px;height:350px;">
             <br>
