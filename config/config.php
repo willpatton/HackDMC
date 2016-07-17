@@ -9,9 +9,9 @@ require_once 'functions.php';
 
 //INI
 ini_set('display_errors', '1'); //debug
-//ini_set('display_errors', '0'); //production
+ini_set('display_errors', '0'); //production
 
-$debug = TRUE;
+$debug = FALSE;
 
 date_default_timezone_set('UTC');
 
