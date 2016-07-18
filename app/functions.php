@@ -1,8 +1,18 @@
 <?php
-//functions.php
+/**
+ * app/functions.php
+ *
+ * "hackathon" quality code
+ * not yet in a class.  To support quick development.
+ *
+ */
 
 
-//RENDER
+/**
+ * RENDER - render an array to HTML
+ * @param $ar
+ * @return string
+ */
 function n_ar($ar)
 {
     //ksort($ar);
@@ -19,7 +29,14 @@ function n_ar($ar)
     return $html;
 }
 
-//IMPORT file to db
+
+/**
+ * IMPORT - imports raw JSON data from a file to a SQL database
+ * (tested to 1.7 million rows before time out 30 seconds)
+ * Added LIMIT hack to control loop count
+ * @param $db
+ * @param $filename
+ */
 function import_ar($db, $filename)
 {
     global $table, $lines;
@@ -71,35 +88,12 @@ function import_ar($db, $filename)
 }
 
 
-//EXPORT
-function export($filename, $ar)
-{
-
-    //CSV
-    //$html .= csv_ar($ar);
-
-    //$fin = fopen($filenamein, 'r');
-    //$fout = fopen($filenameout, 'w+');
-
-    //EXPORT TO CSV - works okay kinda
-    //export_csv($filenamein, $filenameout);
-
-
-    $html = '';
-    foreach($ar as $key=>$val){
-        //$html .= $key . ',';
-        if(is_array($val)){
-            //$html .= "\t".$key . " \n";
-            $html .= ",".n_ar($val);
-            continue;
-        }
-        $html .= ','. $val;
-    }
-    return $html;
-}
-
-
-
+/**
+ * EXPORT - export a data array to a CSV file.  Tested at 600,000 lines (30 seconds runtime)
+ * Added LIMIT hack to control loop count
+ * @param $filenamein
+ * @param $filenameout
+ */
 function export_csv($filenamein, $filenameout)
 {
     global $count,$lines,$html;
@@ -139,7 +133,7 @@ function export_csv($filenamein, $filenameout)
             $html .= "\n";
         }
 
-
+        //BREAKOUT  - specific to machine 270... a hack for for debug.
         if($ar['machine_id'] == 270) {
 
             //print_r($ar);
@@ -189,3 +183,38 @@ function export_csv($filenamein, $filenameout)
     echo '<p>Complete: '.$count.' lines</p>';
 
 }
+
+/**
+ * EXPORT - export a data array to the screen
+ * KEEP, BUT NO LONGER USED
+ * @param $filename
+ * @param $ar
+ * @return string
+ */
+/*
+function export($filename, $ar)
+{
+
+    //CSV
+    //$html .= csv_ar($ar);
+
+    //$fin = fopen($filenamein, 'r');
+    //$fout = fopen($filenameout, 'w+');
+
+    //EXPORT TO CSV - works okay kinda
+    //export_csv($filenamein, $filenameout);
+
+
+    $html = '';
+    foreach($ar as $key=>$val){
+        //$html .= $key . ',';
+        if(is_array($val)){
+            //$html .= "\t".$key . " \n";
+            $html .= ",".n_ar($val);
+            continue;
+        }
+        $html .= ','. $val;
+    }
+    return $html;
+}
+*/

@@ -3,15 +3,18 @@
  *
  * controller.php
  *
- *
+ * A hacked together controller consisting of:
+ * ROUTES, OBJECTS, ACTIONS...
  *
  */
 
+//GLOBALS
 $action = '';
+
 
 /**
  *
- * ROUTES, UI SESSION VARS
+ * ROUTES
  *
  */
 if(1){
@@ -183,11 +186,14 @@ if(1){
         else {$_SESSION['sum'] = 1 ;}
     }
 
+
+
 //*****************
 //
 //OBJECTS  /  MODEL
 //
 //*****************
+
 
 //SQL - database class
 $db = new \Dynamics\dbMySQLi($db_config);
@@ -196,12 +202,13 @@ $db = new \Dynamics\dbMySQLi($db_config);
 $table = 'data';
 
 
-//MONTHS - not used
+/*
+//MONTHS
     $months = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
     $months_rev = array_reverse($months);
     array_unshift($months, "Months");
     array_unshift($months_rev, "Months");
-
+*/
 
 
 //FILE - hardcoded file I/O -  TODO - put a UI on this

@@ -8,10 +8,10 @@ namespace Dynamics;
  * MySQLi database routines
  * Class dbMySQLi
  * @package Dynamics
+ * @author Will Patton
  */
 Class dbMySQLi
 {
-
     /**
      * @var array of db connect values
      */

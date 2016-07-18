@@ -1,5 +1,11 @@
 <?php
-//index.php
+/**
+ * app/index.php
+ *
+ * The main() entry point to this app
+ */
+
+//namespace HackDMC
 require_once '../app/includes.php';
 
 
@@ -10,10 +16,16 @@ require_once '../app/includes.php';
  */
 
 
-/*
+/**
+ * RAW MTCONNECT DATA - JSON format
  *
- * EXAMPLE FORMAT
- * THIS IS HOW THE MTConnect arrives after JSON decode
+ * this is "line 1" of the 2016 data set given in a 2GB data file
+ */
+//{ "_id" : { "$oid" : "57622442ea3a8eb769cac0fc" }, "category" : "Energy", "component" : "Electric", "type" : "Watts", "subtype" : null, "machine_id" : 270, "instance_id" : 1465845658, "sequence" : 7057, "department" : [ 31, 56, 144 ], "begin_dt_tm" : 1466049599, "mt_name" : null, "mt_value" : "120000.0", "virtual_flag" : "N" }
+
+
+/*
+ * DECODED DATA STRUCTURE array - format of the MTConnect as itarrives after JSON decode
  *
 Array
 (
@@ -46,8 +58,7 @@ Array
 
 /**
  *
- * THIS ARRAY (
- *
+ * DATA STRUCTURE - This is the main array used by the app.  It is populated with SQL queries.
  * TODO - make this a class
  */
 $aid = array(
@@ -64,6 +75,7 @@ $aid = array(
     'mt_name' => 'nm',
     'mt_value' => 'val',
     'description' => 'desc',
+//TODO - implement these remaining fields as time/need allow
 //    'block' => '',
 //    'ControllerMode' => '',
 //    'DoneFlag' => '',
@@ -80,9 +92,13 @@ $aid = array(
 //    'Workorder' => '',
 );
 
+/**
+ *
+ * SQL Queries
+ *
+ */
 
-
-//machine grid
+//QUERY - MACHINE GRID - get unique machines for viewing "at-a-glance". Order by most recent timestamp
 if($_SESSION['tab'] == 'machine'){
     $sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
     //$sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
@@ -97,7 +113,8 @@ if($_SESSION['tab'] == 'machine'){
     $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
     $sql .= " LIMIT ".LIMIT_SQL;
 }
-//machine list
+
+//QUERY - MACHINE LIST - display a list of machine records for a machine (search by keyword)
 if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'list' ){
     $sql = '';
     $sql = "SELECT * FROM " . $table . "  ";
@@ -107,7 +124,7 @@ if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'list' ){
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
-//alarm
+//QUERY - ALARMS - get unique alarms for viewing "at-a-glance".
 if($_SESSION['tab'] == 'alarm'){
 
     $sql = "SELECT * FROM " . $table . " ";
@@ -118,7 +135,7 @@ if($_SESSION['tab'] == 'alarm'){
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
-//department
+//QUERY - DEPARTMENT  - display a list of machine records for a machine (search by keyword)
 if($_SESSION['tab'] == 'department'){
     $sql = "SELECT * FROM " . $table . " ";
     $sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
@@ -126,26 +143,29 @@ if($_SESSION['tab'] == 'department'){
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
-
-
-//QUERY
+//QUERY - run the query
 if(isset($sql)) {
-
+    //echo SQL to top of screen if debug enabled
     if ($debug) {
         echo $sql;
     }
+    //RUN the QUERY!!!
     $result = $db->dbQuery($sql);
+
+    //NUM - number of rows found for the query
     $num = $result->num_rows;
-//echo "<p>Rows Found: $num</p>";
+    //echo "<p>Rows Found: $num</p>";
+
+    //FETCH - get record and put into array form
     if ($num) {
         //$row = $result->fetch_assoc();
     }
-//print_r($row);
-//exit;
+    //print_r($row);
+    //exit;
 }
 
 
-//detail
+//QUERY - "DETAIL"
 if($_SESSION['view'] == 'detail'){
     $sql = "SELECT * FROM " . $table . " ";
     $sql .= " WHERE `id` = $id ";
@@ -159,18 +179,6 @@ if($_SESSION['view'] == 'detail'){
     }
 
 }
-
-
-/* TODO
-//count
-$sql = "SELECT count(*) as total from data ";
-$cresult = $db->dbQuery($sql);
-$num = $cresult->num_rows;
-if ($num) {
-    $crow = $cresult->fetch_assoc();
-}
-//print_r($crow);
-*/
 
 
 /**

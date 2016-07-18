@@ -27,7 +27,6 @@ define('LOGS_DIR', ROOT_DIR.'logs/');
 define('ERROR_LOG_FILE', ROOT_DIR.'logs/');
 
 
-
 //APP
 /*$title = $row['name'];
 $description = $row['description'];

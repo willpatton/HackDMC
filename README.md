@@ -1,30 +1,42 @@
-# HackDMC
-This codebase is for the DMC Hackathon - HackDMC weekend July 15-17, 2016
+# HackDMC - A Hackathon Project
+This codebase is for the DMC Hackathon - HackDMC weekend July 15-17, 2016.
+This project won 2nd place.
 
+This app interprets vast amounts of machine data as a dashboard. The "intent" of this app is better "decision" making based on "very clear and thoughtful" indicators (i.e. "good vs bad", "yes vs no", "color code: red, yellow, green").  Intended users of this app include operators, ops managers and execs for use at the regular ops meetings (daily, weekly, monthly). 
+
+Streaming MTConnect data would provide real-time visibility.
 
 # Participants
-Will
-Connor
-Eric
-Taylor
+* Will - developer
+* Connor - data scientist
+* Eric - business executive
+* Taylor - student
 
-
-# Stack
-LAMP
-
-#COMMENTS
-A loosely (rudely) coded MVC / Restful app.  
-
+#ABOUT
+About this app - A loosely (rudely) coded MVC / Restful app.  
 
 Folders
 * /app - the app runs with index.php from this folder
 * /config - 
 * /data - Company, Project data I/O
-* /sql - Database schema. Consists of data, assets, parts...
+* /sql - Database schema. Consists of tables for data, deparmtnes, assets, parts...
 * /template - php templating 
 * /reports - static HTML pages from Connor
 * /docs - PowerPoint from Eric
 
+# Dev Stack
+LAMP - PHP, MySQL
+Bootstrap
+JQuery
+
+# Installation
+* Download to a LAMP server
+* Configure the database settings in /config/database_config.php
+* Initialize the database using the .sql in /sql
+
+Data policy
+The .sql schema is structure only (no data).
+2GB JSON of real world MTConnect machine data not included. 
 
 
 #UNFINISHED
