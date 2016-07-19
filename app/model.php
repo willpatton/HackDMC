@@ -2,6 +2,8 @@
 /**
  * app/model.php
  *
+ * Data Structures and Queries
+ *
  */
 
 
@@ -87,6 +89,15 @@ $aid = array(
 //    'Utilization' => '',
 //    'Workorder' => '',
 );
+
+
+
+
+//TODO - remove this patch
+if(!isset($_SESSION['tab'])){
+    $_SESSION['tab'] = 'machine';
+}
+
 
 /**
  *

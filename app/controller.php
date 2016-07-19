@@ -4,7 +4,7 @@
  * controller.php
  *
  * A hacked together controller consisting of:
- * HTTP, ROUTES, OBJECTS, ACTIONS...
+ * HTTP, ROUTES, OBJECTS, ACTIONS, CONTROL...
  *
  */
 
@@ -191,12 +191,11 @@ if($loggedin) {
 
 
 
-//*****************
-//
-// INIT
-//
-//*****************
-
+    //*****************
+    //
+    // INIT
+    //
+    //*****************
 
     /*
     //MONTHS
