@@ -1,8 +1,6 @@
 <?php
-//header.php
+// template/header.php
 ?>
-
-
 
 <div class="">
     <?php echo '<div class="title hidden-print">'.$app['name'].'</div>'."\n"; ?>
@@ -12,10 +10,11 @@
 
     <!-- view -->
     <div class="hidden-print"  style="display:inline-block; margin:.5em;margin-right:2em;font-size:2em;">
-        <a href="?view=cards"><span class="glyphicon glyphicon-th" title="Cards"></span></a>
+        <a href="?view=grid"><span class="glyphicon glyphicon-th" title="Grid"></span></a>
         <a href="?view=list"><span class="glyphicon glyphicon-list" title="List"></span></a>
     </div>
 
+    <!-- time shift -->
     <div class="hide hidden-print" style="display:inline-block; margin:.5em;margin-right:3em;font-size:2em;">
         <a href="?prevnext=-6"><span class="glyphicon glyphicon-fast-backward"></span></a>&nbsp;
         <a href="?prevnext=-1"><span class="glyphicon glyphicon-backward"></span></a>&nbsp;
@@ -25,6 +24,7 @@
         <?php echo '<span class="lite">'.$_SESSION['prevnext'].'</span>'; ?>
     </div>
 
+    <!-- detail +/- -->
     <div class="hide hidden-print" style="display:inline-block; margin:.5em;margin-right:3em; font-size:2em;">
         <a href="?periods=-6"><span class="glyphicon glyphicon-minus"></span></a>&nbsp;
         <a href="?periods=6"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
@@ -35,7 +35,7 @@
         <?php echo '<span class="lite">'.$_SESSION['sum'].'</span>'; ?>
     </div>
 
-
+    <!-- filter, sort -->
     <div class="hidden-print" style="display:inline-block; margin:.5em;margin-right:3em; font-size:2em;">
         <a href="?filter"><span class="glyphicon glyphicon-filter" title="Filter"></span></a>&nbsp;
         <a href="?sort"><span class="glyphicon glyphicon-sort" title="Sort"></span></a>&nbsp;
@@ -43,28 +43,28 @@
         <?php echo '<span class="lite">'.$_SESSION['sort'].'</span>'; ?>
     </div>
 
-    <div class="hidden-print" style="display:inline-block; margin:.5em;margin-right:3em; font-size:2em;">
+    <!-- font size -->
+    <div class="hide hidden-print" style="display:inline-block; margin:.5em;margin-right:3em; font-size:2em;">
         <a href="?font=-10"><span class="glyphicon glyphicon-font" style="font-size:60%;"></span></a>&nbsp;
         <a href="?font=10"><span class="glyphicon glyphicon-font"></span></a>&nbsp;
         <a href="?font=100"><span class="glyphicon glyphicon-remove-circle"></span></a>&nbsp;
         <?php echo '<span class="lite">'.$_SESSION['font'].'</span>'; ?>
     </div>
 
+    <!-- print -->
     <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
         <a href="javascript:window.print()" title="Print"><span
                 class="glyphicon glyphicon-print"></span></a>&nbsp;&nbsp;
     </div>
 
+    <!-- file import/export -->
     <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
-        <a href="?action=import" title="Import"><span
-                class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;
-    </div>
-    <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
-        <a href="?action=export" title="Export CSV"><span
-                class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
+        <a href="?action=import" title="Import"><span class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;
+        <a href="?action=export" title="Export CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
     </div>
 
-    <div class="hidden-print" style="display:inline-block; margin:.5em;">
+    <!-- search -->
+    <div id="search" class="hidden-print" style="display:inline-block; margin:.5em;">
         <form id="searchform" action="../app/index.php" method="post" name="searchform">
             <input class="form-control" name="keyword" type="text" placeholder="search" size="20" maxlength="128">
             <input type="hidden" name="search" value="search">
@@ -72,7 +72,6 @@
             <input type="hidden" name="table" value="app_assembly">
         </form>
     </div>
-
 
     <!-- tabs -->
     <div id="navtab" class="hidden-print col-xs-12" style="margin-bottom:.3em;">
@@ -85,8 +84,8 @@
     </div>
 
 
-
-    <div class="hide col-md-12" >
+    <!-- search advanced toolbar -->
+    <div id="search-toolbar" class="hide col-md-12" >
         <h1>Search</h1>
         <!--
             <p>Showing search by Keyword: <em></em> Field: <em>assemblyid</em> Table:
@@ -110,6 +109,5 @@
             <input type="radio" name="field" id="status" value="status" >&nbsp;Status&nbsp;&nbsp;&nbsp;-->
             <input type="radio" name="field" id="application" value="application" >&nbsp;Alarms&nbsp;&nbsp;&nbsp;
         </form>
-        <p>&nbsp;</p>
     </div>
 

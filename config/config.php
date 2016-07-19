@@ -1,19 +1,25 @@
 <?php
-//config.php
+/**
+ *
+ * config.php
+ *
+ */
 
 //SESSION
 if (!isset($_SESSION)) {
     session_start();
 }
-require_once 'functions.php';
 
-//INI
+//INIT
 ini_set('display_errors', '1'); //debug
-ini_set('display_errors', '0'); //production
-
-$debug = FALSE;
-
+//ini_set('display_errors', '0'); //production
 date_default_timezone_set('UTC');
+
+
+//APP
+$loggedin = TRUE;
+$debug = TRUE;
+
 
 //DEFINES
 define('DATA_DIR', '../data/');
@@ -28,7 +34,8 @@ define('ERROR_LOG_FILE', ROOT_DIR.'logs/');
 
 
 //APP
-/*$title = $row['name'];
+$title = 'HackDMC';
+/*
 $description = $row['description'];
 $keywords = $row['keywords'];
 $canonical = $row['domain'];
@@ -36,7 +43,7 @@ $canonical = $row['domain'];
 
 $app = array(
     'name' => '<span class="glyphicon glyphicon-dashboard"></span>&nbsp;DMC Analytics',
-    //'companyname' => 'Itamco'
+    'companyname' => 'Acme'
 );
 
 $brand = array(

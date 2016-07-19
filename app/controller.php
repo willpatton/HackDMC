@@ -4,7 +4,7 @@
  * controller.php
  *
  * A hacked together controller consisting of:
- * ROUTES, OBJECTS, ACTIONS...
+ * HTTP, ROUTES, OBJECTS, ACTIONS...
  *
  */
 
@@ -12,12 +12,14 @@
 $action = '';
 
 
-/**
- *
- * ROUTES
- *
- */
-if(1){
+if($loggedin) {
+
+    //*****************
+    //
+    // HTTP GET, POST
+    //
+    //*****************
+
 
     //ACTION
     if(isset($_GET['action']) && $_GET['action'] !== '')  {
@@ -88,7 +90,7 @@ if(1){
 
     //VIEW
     if(!isset($_SESSION['view'])) {
-        $_SESSION['view'] = 'cards';
+        $_SESSION['view'] = 'grid';
     }
     if(isset($_GET['view']) && $_GET['view'] !== '')  {
         $_SESSION['view'] = filter_input(INPUT_GET,'view', FILTER_SANITIZE_STRING);
@@ -129,7 +131,7 @@ if(1){
     }
 
 
-//PREVNEXT
+    //PREVNEXT
     if(!isset($_SESSION['prevnext'])) {
         $_SESSION['prevnext'] = 0;
     }
@@ -143,7 +145,7 @@ if(1){
         }
     }
 
-//PERIODS
+    //PERIODS
     if(!isset($_SESSION['periods'])) {
         $_SESSION['periods'] = 12;
     }
@@ -158,7 +160,7 @@ if(1){
         }
     }
 
-//FONT SIZE
+    //FONT SIZE
     if(!isset($_SESSION['font'])) {
         $_SESSION['font'] = 100;
     }
@@ -176,7 +178,8 @@ if(1){
         }
     }
 
-//SUM
+
+    //SUM
     if(!isset($_SESSION['sum'])) {
         $_SESSION['sum'] = 0;
     }
@@ -190,48 +193,43 @@ if(1){
 
 //*****************
 //
-//OBJECTS  /  MODEL
+// INIT
 //
 //*****************
 
 
-//SQL - database class
-$db = new \Dynamics\dbMySQLi($db_config);
-
-//The main table in the db
-$table = 'data';
-
-
-/*
-//MONTHS
+    /*
+    //MONTHS
     $months = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
     $months_rev = array_reverse($months);
     array_unshift($months, "Months");
     array_unshift($months_rev, "Months");
-*/
+    */
 
 
-//FILE - hardcoded file I/O -  TODO - put a UI on this
+    //FILE - hardcoded file I/O -  TODO - put a UI on this
     $filenamein  = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.json';
     $filenameout = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.csv';
 
 
-}
+    //*****************
+    //
+    // ACTIONS
+    //
+    //*****************
 
+    switch($action){
+        case 'import': {
+            $rtn = import_ar($db, $filenamein);
+            break;
+        }
+        case 'export': {
+            export($filenameout, $ar = array());  //TODO - array to csv
+            break;
+        }
+        default: {}
 
-//ACTIONS
-switch($action){
-    case 'import': {
-        $rtn = import_ar($db, $filenamein);
-        break;
     }
-    case 'export': {
-        export($filenameout, $ar = array());  //TODO
-        break;
-    }
-    default: {}
+
 
 }
-
-
-

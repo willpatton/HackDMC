@@ -1,8 +1,12 @@
-# HackDMC - A Hackathon Project
-This codebase is for the DMC Hackathon - HackDMC weekend July 15-17, 2016.
+# HackDMC - A Hackathon Project for UI Labs
+www.uilabs.org
+
+This codebase is for the UI Labs "DMC Hackathon" - HackDMC weekend July 15-17, 2016.
 This project won 2nd place.
 
-This app interprets vast amounts of machine data as a dashboard. The "intent" of this app is better "decision" making based on "very clear and thoughtful" indicators (i.e. "good vs bad", "yes vs no", "color code: red, yellow, green").  Intended users of this app include operators, ops managers and execs for use at the regular ops meetings (daily, weekly, monthly). 
+This app interprets vast amounts of machine data (collected by MTConnect sensors) as a dashboard. 
+The "intent" of this app is better "decision" making based on "very clear and thoughtful" indicators (i.e. "good vs bad", "yes vs no", "color code: red, yellow, green").  
+Intended users of this app include operators, ops managers and execs for use at the regular ops meetings (daily, weekly, monthly). 
 
 Streaming MTConnect data would provide real-time visibility.
 
@@ -39,5 +43,6 @@ The .sql schema is structure only (no data).
 2GB JSON of real world MTConnect machine data not included. 
 
 
-#UNFINISHED
+#Unfinished
 * See the TODO in the code
+* Live streaming data feed of MTConnect data

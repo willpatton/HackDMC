@@ -33,13 +33,13 @@ function n_ar($ar)
 /**
  * IMPORT - imports raw JSON data from a file to a SQL database
  * (tested to 1.7 million rows before time out 30 seconds)
- * Added LIMIT hack to control loop count
+ * Added LIMIT hack to control max loop count
  * @param $db
  * @param $filename
  */
 function import_ar($db, $filename)
 {
-    global $table, $lines;
+    global $table; //, $lines;
     $count = 0;
 
     $f = fopen($filename, 'r');
@@ -63,7 +63,7 @@ function import_ar($db, $filename)
         $fields = rtrim($fields, ', ');
         $values = rtrim($values, ', ');
 
-        //insert row
+        //INSERT
         //$fields = 'machine_id, description';
         //$values = '270, "Hello World" ';
         $sql = "INSERT INTO " . $table . ($fields == "" ? "" : " (" . $fields . ")") . " VALUES (" . $values . ")";
@@ -94,7 +94,7 @@ function import_ar($db, $filename)
  * @param $filenamein
  * @param $filenameout
  */
-function export_csv($filenamein, $filenameout)
+function convert_json_to_csv($filenamein, $filenameout)
 {
     global $count,$lines,$html;
 
@@ -144,13 +144,13 @@ function export_csv($filenamein, $filenameout)
             $html .= $ar['type'].",";
             $html .= $ar['subtype'].",";
             $html .= $ar['machine_id'].",";
-            @$html .= $ar['instance_id'].",";
+            @$html .= $ar['instance_id'].",";       //TODO - suppressed warning
             $html .= $ar['sequence'].",";
             $html .= $ar['department'][0].",";
             $html .= $ar['department'][1].",";
             $html .= $ar['department'][2].",";
             $html .= $ar['begin_dt_tm'].",";
-            @$html .= $ar['mt_name'].",";
+            @$html .= $ar['mt_name'].",";           //TODO - suppressed warning
             $html .= $ar['mt_value'].",";
             $html .= $ar['virtual_flag'].",";
             $html .= "\n";
