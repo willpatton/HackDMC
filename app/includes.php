@@ -8,6 +8,9 @@ require_once '../config/config.php';
 require_once '../config/database_config.php';
 require_once '../classes/database.class.php';
 
+//HTTP
+require_once '../app/http.php';
+
 //MODEL
 require_once '../app/model.php';
 

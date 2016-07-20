@@ -73,6 +73,14 @@
         </form>
     </div>
 
+    <!-- ui messages -->
+    <?php if(isset($msg) && $msg != ''){
+        echo '<div id="msg" class="hidden-print" style=" margin:.5em;">';
+        echo $msg;
+        echo '</div>';
+    }
+    ?>
+
     <!-- tabs -->
     <div id="navtab" class="hidden-print col-xs-12" style="margin-bottom:.3em;">
         <ul class="nav nav-tabs">

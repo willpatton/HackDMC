@@ -26,11 +26,14 @@ define('DATA_DIR', '../data/');
 define('LIMIT_SQL', 1024);
 define('LIMIT_IMPORT', 500);
 
-//local
+//FILES & FOLDERS
 define('ROOT_DIR', '../');
 define('APP_DIR', ROOT_DIR.'app/');
 define('LOGS_DIR', ROOT_DIR.'logs/');
 define('ERROR_LOG_FILE', ROOT_DIR.'logs/');
+
+//define('PATH_DIR', '/var/www/html/hackdmc/');
+///var/www/html/hackdmc/data/itamco
 
 
 //APP

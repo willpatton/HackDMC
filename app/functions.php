@@ -13,7 +13,7 @@
  * @param $ar
  * @return string
  */
-function n_ar($ar)
+function render_ar($ar)
 {
     //ksort($ar);
     $html = '';
@@ -21,7 +21,7 @@ function n_ar($ar)
         $html .= $key;
         if(is_array($val)){
             //$html .= "\t".$key . " \n";
-            $html .= "\n".n_ar($val);
+            $html .= "\n".render_ar($val);
             continue;
         }
         $html .= ' '. $val . "\n";
@@ -37,9 +37,9 @@ function n_ar($ar)
  * @param $db
  * @param $filename
  */
-function import_ar($db, $filename)
+function import_json_to_db($db, $filename)
 {
-    global $table; //, $lines;
+    global $table, $msg; //, $lines;
     $count = 0;
 
     $f = fopen($filename, 'r');
@@ -47,13 +47,13 @@ function import_ar($db, $filename)
     while ($buffer = fgets($f)) {
 
         //READ
-        $aid = json_decode($buffer, true);
+        $ar = json_decode($buffer, true);
         //print_r($ar);
 
         //INSERT
         $fields = '';
         $values = '';
-        foreach ($aid as $key => $val) {
+        foreach ($ar as $key => $val) {
             //TODO - handle nested arrays
             if (!is_array($val)) {
                 $fields .= "$key, ";
@@ -68,15 +68,13 @@ function import_ar($db, $filename)
         //$values = '270, "Hello World" ';
         $sql = "INSERT INTO " . $table . ($fields == "" ? "" : " (" . $fields . ")") . " VALUES (" . $values . ")";
         //echo $sql;
-        //print_r($db);
-        //exit;
 
         $cresult = $db->dbQuery($sql);
-        //if ($num) {
-        //    $crow = $cresult->fetch_assoc();
-        //}
-
-        //print_r($cresult);
+        if ($cresult) {
+            //TRUE - insert was okay
+        } else {
+            //FALSE - insert had error
+        }
 
 
         //BREAK if too many
@@ -85,11 +83,15 @@ function import_ar($db, $filename)
         }
         $count++;
     }
-}
+
+    if($count > 0){
+        $msg = '<p style="color:green;">Imported okay: '.$count.' of '.LIMIT_IMPORT.' records. Source file: '.$filename.'</p>'."\n";
+    }
+ }
 
 
 /**
- * EXPORT - export a data array to a CSV file.  Tested at 600,000 lines (30 seconds runtime)
+ * EXPORT - export a data array to a CSV file.  Tested at 200,000 lines (30 seconds runtime)
  * Added LIMIT hack to control loop count
  * @param $filenamein
  * @param $filenameout
@@ -178,7 +180,7 @@ function convert_json_to_csv($filenamein, $filenameout)
     fclose($fin);
 
 //echo $html;
-    file_put_contents('itamcojson2016.csv', $html);
+    file_put_contents($fout, $html);
 
     echo '<p>Complete: '.$count.' lines</p>';
 
@@ -191,30 +193,54 @@ function convert_json_to_csv($filenamein, $filenameout)
  * @param $ar
  * @return string
  */
-/*
-function export($filename, $ar)
+function export_ar_to_csv($filename, $result)
 {
+    //global $msg;
 
-    //CSV
-    //$html .= csv_ar($ar);
+    $csv = '';
+    $count = 0;
 
-    //$fin = fopen($filenamein, 'r');
-    //$fout = fopen($filenameout, 'w+');
+    while($ar = $result->fetch_assoc()) {
 
-    //EXPORT TO CSV - works okay kinda
-    //export_csv($filenamein, $filenameout);
-
-
-    $html = '';
-    foreach($ar as $key=>$val){
-        //$html .= $key . ',';
-        if(is_array($val)){
-            //$html .= "\t".$key . " \n";
-            $html .= ",".n_ar($val);
-            continue;
+        foreach($ar as $key=>$val){
+            $csv .= $key . ',';
+            if(is_array($val)){
+                //$csv .= "\t".$key . " \n";
+                //$html .= ",".n_ar($val);
+                continue;
+            }
+            $csv .= ','. $val;
         }
-        $html .= ','. $val;
+        $csv .= "\n";
+
+        $count++;
     }
-    return $html;
+
+    //SAVE - to server
+    //$bytes = file_put_contents($filename, $csv);
+
+
+    //DOWNLOAD - to client
+    $quoted = sprintf('"%s"', addcslashes(basename($filename), '"\\'));
+    $size   = filesize($filename);
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename=' . $quoted);
+    header('Content-Transfer-Encoding: binary');
+    header('Connection: Keep-Alive');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . $size);
+
+    echo $csv;
+    exit();
+
+    /*
+    if($count > 0) {
+        $msg = '<p style="color:green;">Export okay: ' . $count . ' of ' . LIMIT_IMPORT . ' records. Export file: ' . $filename . '</p>' . "\n";
+    } else {
+        $msg = '<p style="color:red;">Export 0 records: '. $filename . '</p>' . "\n";
+    }
+    */
 }
-*/

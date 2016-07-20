@@ -11,10 +11,11 @@ require_once '../app/includes.php';
 global $result, $num;
 
 
-if(!$result){
-    //TODO - remove this hack - start over if result not present
-    header('Location: ?');
-}
+/**
+ *
+ * model - see model.php
+ *
+ */
 
 /**
  *
@@ -22,11 +23,6 @@ if(!$result){
  *
  */
 
-/**
- *
- * model - see model.php
- *
- */
 
 /**
  *
@@ -41,11 +37,13 @@ require_once '../template/head.php';
     <div class="container">
 
     <?php
-        //CARD - render the card view
-        if($_SESSION['view'] == 'grid' && $_SESSION['tab'] != 'report' ){
+    $html = '';
+    //$count = 0;
 
-            $html = '';
-            //$count = 0;
+        //CARD - render the card view
+        if(($_SESSION['tab'] == 'machine' OR $_SESSION['tab'] == 'alarm') && $_SESSION['view'] == 'grid'){
+
+
             while ($row = $result->fetch_assoc()) {
                 $ar = $row;
 
@@ -65,6 +63,7 @@ require_once '../template/head.php';
 
                 //$html .= '<h3>'.$ar['count']."</h3>\n";
                 $html .= '<p>' . gmdate("Y-m-d H:i:s Z", $ar['begin_dt_tm']) . "</p>\n";
+                $html .= '<p style="color:#ccc;">id:' . $ar['id'] . "</p>\n";
 
                 $html .= "\n" . '<p class="hidden-print" style="text-align:right;margin-right:1em;">
                     <a href="../app/index.php?view=detail&id=' . $ar['id'] . '"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -74,10 +73,8 @@ require_once '../template/head.php';
         }
 
         //LIST - render the list view
-        if ($_SESSION['view'] == 'list' && $_SESSION['tab'] != 'report' ) {
+        if (($_SESSION['tab'] == 'machine' OR $_SESSION['tab'] == 'alarm') && $_SESSION['view'] == 'list' ) {
 
-            $html = '';
-            //$count = 0;
             while ($row = $result->fetch_assoc()) {
                 $ar = $row;
 
@@ -112,7 +109,9 @@ require_once '../template/head.php';
     }
 
     //STATS (common to grid or list view)
-    if(($_SESSION['view'] == 'grid' OR $_SESSION['view'] == 'list') && $_SESSION['tab'] != 'report' ) {
+    if(($_SESSION['tab'] == 'machine' OR $_SESSION['tab'] == 'alarm')
+        &&
+        ($_SESSION['view'] == 'grid' OR $_SESSION['view'] == 'list')) {
         ?>
         <p style = "font-size:140%;" ><?php //echo 'Filter: '.$_SESSION['filter'] .' '. $_SESSION['keyword'] . '<br>';
         //echo $_SESSION['category'] .' '. $_SESSION['category_keyword']; ?>
@@ -126,11 +125,10 @@ require_once '../template/head.php';
 
 
     //DETAIL - render the detail view
-    if($_SESSION['view'] == 'detail' && $_SESSION['tab'] != 'report' ){
-
+    if($_SESSION['view'] == 'detail') {
         ?>
         <h1>Detail</h1>
-        <p><a href="../reports/Compare.php">Compare</a> | <a href="../app/index.php?view=grid">Back</a></p>
+        <p><a href="../app/index.php?view=grid">Back</a></p>
         <pre>
         <?php print_r($ar); ?>
         </pre>

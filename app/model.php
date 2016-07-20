@@ -7,6 +7,20 @@
  */
 
 
+/**
+ *
+ * HTTP for model
+ *
+ */
+
+
+
+/**
+ *
+ *
+ *
+ */
+
 //SQL - database class
 $db = new \Dynamics\dbMySQLi($db_config);
 
@@ -91,14 +105,6 @@ $aid = array(
 );
 
 
-
-
-//TODO - remove this patch
-if(!isset($_SESSION['tab'])){
-    $_SESSION['tab'] = 'machine';
-}
-
-
 /**
  *
  * SQL Queries
@@ -106,7 +112,7 @@ if(!isset($_SESSION['tab'])){
  */
 
 //QUERY - MACHINE GRID - get unique machines for viewing "at-a-glance". Order by most recent timestamp
-if($_SESSION['tab'] == 'machine'){
+if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid') {
     $sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
     //$sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
     //$sql .= " AND `category` != 'WorkOrder' ";
@@ -132,13 +138,23 @@ if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'list' ){
 }
 
 //QUERY - ALARMS - get unique alarms for viewing "at-a-glance".
-if($_SESSION['tab'] == 'alarm'){
+if($_SESSION['tab'] == 'alarm' && $_SESSION['view'] == 'grid'){
 
     $sql = "SELECT * FROM " . $table . " ";
     $sql .= " WHERE `machine_id` LIKE '%".$_SESSION['keyword']. "%' ";
     //$sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
     $sql .= " AND `alarm_condition` = 'Alarm' ";
     $sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
+    $sql .= " LIMIT ".LIMIT_SQL;
+}
+
+//QUERY - ALARMS - get unique alarms for viewing "at-a-glance".
+if($_SESSION['tab'] == 'alarm' && $_SESSION['view'] == 'list'){
+    $sql = '';
+    $sql = "SELECT * FROM " . $table . "  ";
+    $sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
+    //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
+    $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
@@ -171,20 +187,25 @@ if(isset($sql)) {
     }
     //print_r($row);
     //exit;
+    else {
+        $ar = array('No data, retry');  //blank
+    }
 }
 
 
 //QUERY - "DETAIL"
-if($_SESSION['view'] == 'detail'){
-    $sql = "SELECT * FROM " . $table . " ";
-    $sql .= " WHERE `id` = $id ";
-    //$sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
+if($_SESSION['view'] == 'detail') {
+    //$sql = "SELECT * FROM " . $table . " ";
+    //$sql .= " WHERE `id` = ".$_SESSION['id']." ";
+    $sql = "SELECT * FROM " . $table . " WHERE id = ".$_SESSION['id']." ";
     $sql .= "ORDER BY `begin_dt_tm` DESC ";
     $sql .= " LIMIT 1 ";
     $result = $db->dbQuery($sql);
     $num = $result->num_rows;
     if ($num) {
         $ar = $result->fetch_assoc();
+    } else {
+        $ar = array('No detail');  //blank
     }
 
 }
