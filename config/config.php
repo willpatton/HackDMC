@@ -18,7 +18,7 @@ date_default_timezone_set('UTC');
 
 //APP
 $loggedin = TRUE;
-$debug = TRUE;
+$debug = FALSE;
 
 
 //DEFINES

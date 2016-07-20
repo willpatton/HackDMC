@@ -21,7 +21,7 @@ if(1) {
     //LOGOUT
     if(isset($_GET['logout']))  {
         $_SESSION = array();
-        print_r($_SESSION);
+        //print_r($_SESSION);
     }
 
     //ACTION
@@ -51,7 +51,7 @@ if(1) {
 
     //SORT
     if (!isset($_SESSION['sort'])) {
-        $_SESSION['sort'] = 'ASC';
+        $_SESSION['sort'] = 'DESC';
     }
     if (isset($_GET['sort'])) {
         if ('ASC' == $_SESSION['sort']) {
@@ -206,6 +206,6 @@ if(1) {
             $_SESSION['sum'] = 1;
         }
     }
-    
+
 
 }

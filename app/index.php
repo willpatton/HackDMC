@@ -9,7 +9,8 @@ namespace HackDMC;
 require_once '../app/includes.php';
 
 global $result, $num;
-
+$html = '';
+//$count = 0;
 
 /**
  *
@@ -37,13 +38,13 @@ require_once '../template/head.php';
     <div class="container">
 
     <?php
-    $html = '';
-    //$count = 0;
 
-        //CARD - render the card view
+        //GRID - render the grid view
         if(($_SESSION['tab'] == 'machine' OR $_SESSION['tab'] == 'alarm') && $_SESSION['view'] == 'grid'){
 
-
+            ?>
+            <p>Showing unique machine assets.  Latest record.</p>
+            <?php
             while ($row = $result->fetch_assoc()) {
                 $ar = $row;
 
@@ -63,9 +64,9 @@ require_once '../template/head.php';
 
                 //$html .= '<h3>'.$ar['count']."</h3>\n";
                 $html .= '<p>' . gmdate("Y-m-d H:i:s Z", $ar['begin_dt_tm']) . "</p>\n";
-                $html .= '<p style="color:#ccc;">id:' . $ar['id'] . "</p>\n";
+                //$html .= '<p style="color:#ccc;">id:' . $ar['id'] . "</p>\n";
 
-                $html .= "\n" . '<p class="hidden-print" style="text-align:right;margin-right:1em;">
+                $html .= "\n" . '<p class="hidden-print" style="text-align:right;margin-right:1em;">id:' . $ar['id'].' 
                     <a href="../app/index.php?view=detail&id=' . $ar['id'] . '"><span class="glyphicon glyphicon-pencil"></span></a>
                 </p>';
                 $html .= '</div>';

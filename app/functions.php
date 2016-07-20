@@ -202,14 +202,22 @@ function export_ar_to_csv($filename, $result)
 
     while($ar = $result->fetch_assoc()) {
 
+        if($count == 0) {
+            foreach($ar as $key=>$val) {
+                $csv .= $key . ',';
+            }
+            $csv .= "\n";
+        }
+
+
         foreach($ar as $key=>$val){
-            $csv .= $key . ',';
+            //$csv .= $key . ',';
             if(is_array($val)){
                 //$csv .= "\t".$key . " \n";
                 //$html .= ",".n_ar($val);
                 continue;
             }
-            $csv .= ','. $val;
+            $csv .= $val.',';
         }
         $csv .= "\n";
 

@@ -123,7 +123,7 @@ if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid') {
     //$sql .= " AND `category` != 'Block' ";
     //$sql .= " AND `category` != 'Alarm' ";
     //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
-    $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
+    $sql .= "ORDER BY `machine_id` " .$_SESSION['sort']." ";  //begin_dt_tm
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
