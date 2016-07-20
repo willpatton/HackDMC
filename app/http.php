@@ -51,7 +51,7 @@ if(1) {
 
     //SORT
     if (!isset($_SESSION['sort'])) {
-        $_SESSION['sort'] = 'DESC';
+        $_SESSION['sort'] = 'ASC';
     }
     if (isset($_GET['sort'])) {
         if ('ASC' == $_SESSION['sort']) {

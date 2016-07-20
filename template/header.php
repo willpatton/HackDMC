@@ -59,8 +59,8 @@
 
     <!-- file import/export -->
     <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
-        <a href="?action=import" title="Import"><span class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;
-        <a href="?action=export" title="Export CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
+        <a href="?action=import" title="Import JSON file to database"><span class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;
+        <a href="?action=export" title="Export data in this view as CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
     </div>
 
     <!-- search -->

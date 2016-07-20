@@ -58,9 +58,11 @@ require_once '../template/head.php';
                 //$html .= '<p>'.$ar['mt_value']."</p>\n";
                 //$html .= n_ar($ar) . "\n";
 
-                $html .= '<h3 class="';
-                if($ar['status'] == 'good'){$html .= 'good';}
-                $html .= '">' . $ar['status'] . "</h3>\n";
+                if(isset($ar['status'])){
+                    $html .= '<h3 class="';
+                    if($ar['status'] == 'good'){$html .= 'good';}
+                    $html .= '">' . $ar['status'] . "</h3>\n";
+                }
 
                 //$html .= '<h3>'.$ar['count']."</h3>\n";
                 $html .= '<p>' . gmdate("Y-m-d H:i:s Z", $ar['begin_dt_tm']) . "</p>\n";
@@ -91,7 +93,9 @@ require_once '../template/head.php';
                 $html .= '   ' . $ar['component'];
                 $html .= '   ' . $ar['type'] . " " . $ar['mt_value'] . "</p>\n";
 
-                $html .= '<h3>' . $ar['status'] . "</h3>\n";
+                if(isset($ar['status'])) {
+                    $html .= '<h3>' . $ar['status'] . "</h3>\n";
+                }
                 //$html .= '<h3>'.$ar['count']."</h3>\n";
                 $html .= '<p style="font-size:60%;text-align:right;">' . gmdate("Y-m-d H:i:s", $ar['begin_dt_tm']) . "</p>\n";
 

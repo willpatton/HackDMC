@@ -123,7 +123,7 @@ if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid') {
     //$sql .= " AND `category` != 'Block' ";
     //$sql .= " AND `category` != 'Alarm' ";
     //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
-    $sql .= "ORDER BY `machine_id` " .$_SESSION['sort']." ";  //begin_dt_tm
+    $sql .= "ORDER BY length(`machine_id`), `machine_id`  " .$_SESSION['sort']." ";  //begin_dt_tm  //order by len(registration_no), registration_no
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
@@ -144,7 +144,7 @@ if($_SESSION['tab'] == 'alarm' && $_SESSION['view'] == 'grid'){
     $sql .= " WHERE `machine_id` LIKE '%".$_SESSION['keyword']. "%' ";
     //$sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
     $sql .= " AND `alarm_condition` = 'Alarm' ";
-    $sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
+    $sql .= "ORDER BY length(`machine_id`), `machine_id`  " .$_SESSION['sort']." ";
     $sql .= " LIMIT ".LIMIT_SQL;
 }
 
