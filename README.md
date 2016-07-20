@@ -36,8 +36,8 @@ LAMP - PHP/MySQL, Bootstrap, JQuery
 * Initialize the database using the .sql in /sql
 
 Data policy
-The .sql schema is contains a sample of data.
-24GB JSON of real world MTConnect machine data not included. 
+The .sql schema contains a small sample of data.
+24GB of real world MTConnect machine data (not included). 
 
 
 #Unfinished
