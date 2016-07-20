@@ -24,13 +24,11 @@ Folders
 * /data - Company, Project data I/O
 * /sql - Database schema. Consists of tables for data, departments, assets, parts...
 * /template - php templating 
-* /reports - static HTML pages from Connor
+* /reports - static HTML pages generated using R from Connor
 * /docs - PowerPoint from Eric
 
 # Dev Stack
-LAMP - PHP, MySQL
-Bootstrap
-JQuery
+LAMP - PHP/MySQL, Bootstrap, JQuery
 
 # Installation
 * Download to a LAMP server
