@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="120cad17-3ff9-4be6-ba59-b4d3144dd2f7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="120cad17-3ff9-4be6-ba59-b4d3144dd2f7" name="Default" comment="" />
     <ignored path="HackDMC.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -417,12 +415,12 @@
       <workItem from="1468652219058" duration="24832000" />
       <workItem from="1468708462873" duration="292000" />
       <workItem from="1468709001275" duration="53442000" />
-      <workItem from="1469026897772" duration="14514000" />
+      <workItem from="1469026897772" duration="14567000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106343000" />
+    <option name="totallyTimeSpent" value="106396000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="23" width="1344" height="807" extended-state="0" />
