@@ -14,10 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $title; ?></title>
+    <title><?php echo $app['title']; ?></title>
+
+    <meta name="description" content="<?php echo $app['description']; ?>" >
+    <meta name="keywords" content="<?php echo $app['keywords']; ?>" >
 
     <!-- links -->
-    <link rel="canonical" href="">
+    <link rel="canonical" href="<?php echo $app['canonical']; ?>">
     <link rel="icon" href="../images/wp_favicon_64.png">
 
     <!-- styles -->

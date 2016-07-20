@@ -18,8 +18,20 @@ date_default_timezone_set('UTC');
 
 //APP
 $loggedin = TRUE;
-$debug = FALSE;
+$debug = TRUE;  //turns on debugging output
 
+$app = array(
+    'appname' => 'DMC Analytics',
+
+    'title' => 'HackDMC',
+    'description' => 'Hackathon, MTConnect',
+    'keywords' => 'hackathon, dmc, mtconnect data',
+    'canonical' => 'hackdmc.org',
+
+    'projectname' => 'Acme',
+    'project' => 'acme',
+    'projectdomain' => 'acmexxx.com'
+);
 
 //DEFINES
 define('DATA_DIR', '../data/');
@@ -32,26 +44,5 @@ define('APP_DIR', ROOT_DIR.'app/');
 define('LOGS_DIR', ROOT_DIR.'logs/');
 define('ERROR_LOG_FILE', ROOT_DIR.'logs/');
 
-//define('PATH_DIR', '/var/www/html/hackdmc/');
-///var/www/html/hackdmc/data/itamco
 
-
-//APP
-$title = 'HackDMC';
-/*
-$description = $row['description'];
-$keywords = $row['keywords'];
-$canonical = $row['domain'];
-*/
-
-$app = array(
-    'name' => '<span class="glyphicon glyphicon-dashboard"></span>&nbsp;DMC Analytics',
-    'companyname' => 'Acme'
-);
-
-$brand = array(
-    'company' => 'itamco',
-    'name' => 'Itamco',
-    'domain' => 'itamco.com'
-);
 

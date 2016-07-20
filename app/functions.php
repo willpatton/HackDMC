@@ -7,6 +7,30 @@
  *
  */
 
+/**
+ * LOGOUT - reset app to a known state
+ *
+ */
+function logout(){
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
+    // Unset all of the session variables.
+    $_SESSION = array();
+
+    // If it's desired to kill the session, also delete the session cookie.
+    // Note: This will destroy the session, and not just the session data!
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+    session_destroy();
+}
 
 /**
  * RENDER - render an array to HTML
@@ -31,9 +55,8 @@ function render_ar($ar)
 
 
 /**
- * IMPORT - imports raw JSON data from a file to a SQL database
- * (tested to 1.7 million rows before time out 30 seconds)
- * Added LIMIT hack to control max loop count
+ * IMPORT - initiazlizes a database with data from a JSON file
+ * Added LIMIT to control max loop count
  * @param $db
  * @param $filename
  */
@@ -91,7 +114,8 @@ function import_json_to_db($db, $filename)
 
 
 /**
- * EXPORT - export a data array to a CSV file.  Tested at 200,000 lines (30 seconds runtime)
+ * CONVERT - convert from JSON format to CSV format.  Used once for development
+ * Tested at 200,000 lines (30 seconds runtime)
  * Added LIMIT hack to control loop count
  * @param $filenamein
  * @param $filenameout
@@ -186,17 +210,14 @@ function convert_json_to_csv($filenamein, $filenameout)
 
 }
 
+
 /**
- * EXPORT - export a data array to the screen
- * KEEP, BUT NO LONGER USED
+ * EXPORT - export/download a data array to a CSV
  * @param $filename
- * @param $ar
- * @return string
+ * @param $result
  */
 function export_ar_to_csv($filename, $result)
 {
-    //global $msg;
-
     $csv = '';
     $count = 0;
 
@@ -208,7 +229,6 @@ function export_ar_to_csv($filename, $result)
             }
             $csv .= "\n";
         }
-
 
         foreach($ar as $key=>$val){
             //$csv .= $key . ',';
@@ -224,7 +244,7 @@ function export_ar_to_csv($filename, $result)
         $count++;
     }
 
-    //SAVE - to server
+    //SAVE - optionally save to a server
     //$bytes = file_put_contents($filename, $csv);
 
 
@@ -243,12 +263,4 @@ function export_ar_to_csv($filename, $result)
 
     echo $csv;
     exit();
-
-    /*
-    if($count > 0) {
-        $msg = '<p style="color:green;">Export okay: ' . $count . ' of ' . LIMIT_IMPORT . ' records. Export file: ' . $filename . '</p>' . "\n";
-    } else {
-        $msg = '<p style="color:red;">Export 0 records: '. $filename . '</p>' . "\n";
-    }
-    */
 }

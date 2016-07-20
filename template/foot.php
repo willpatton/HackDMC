@@ -7,7 +7,7 @@
 
 
 <div class="">
-    <?php echo '<div id="footer" class="hidden-print">'.$app['name'].' - Copyright &copy; '. date('Y').'</div>'."\n"; ?>
+    <?php echo '<div id="footer" class="hidden-print">'.$app['appname'].' - Copyright &copy; '. date('Y').'</div>'."\n"; ?>
 </div>
 
 

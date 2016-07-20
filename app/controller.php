@@ -8,6 +8,7 @@
  *
  */
 
+
 if(1) {
 
     //*****************
@@ -26,8 +27,8 @@ if(1) {
 
 
     //FILE - hardcoded file I/O -  TODO - put a UI on this
-    $filenamein  = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.json';
-    $filenameout = '../data/'.$_SESSION['company'].'/'.$_SESSION['company'].'-2016.csv';
+    $filenamein  = '../data/'.$_SESSION['project'].'/'.$_SESSION['project'].'-2016.json';
+    $filenameout = '../data/'.$_SESSION['project'].'/'.$_SESSION['project'].'-2016.csv';
 
 
     //*****************

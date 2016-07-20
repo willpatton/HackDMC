@@ -3,7 +3,10 @@
 ?>
 
 <div class="">
-    <?php echo '<div class="title hidden-print">'.$app['name'].'</div>'."\n"; ?>
+    <?php echo '<div class="title hidden-print">
+        <a href="../app/index.php" style="color:white;text-decoration:none;">
+        <span class="glyphicon glyphicon-dashboard"></span>&nbsp;'.$app['appname'].'</a>
+        </div>'."\n"; ?>
 </div>
 
 <div class="container-fluid">
@@ -37,7 +40,7 @@
 
     <!-- filter, sort -->
     <div class="hidden-print" style="display:inline-block; margin:.5em;margin-right:3em; font-size:2em;">
-        <a href="?filter"><span class="glyphicon glyphicon-filter" title="Filter"></span></a>&nbsp;
+        <!--<a href="?filter"><span class="glyphicon glyphicon-filter" title="Filter"></span></a>&nbsp;-->
         <a href="?sort"><span class="glyphicon glyphicon-sort" title="Sort"></span></a>&nbsp;
         <a href="?clear"><span class="glyphicon glyphicon-remove-circle" title="Clear filter, sort, search..."></span></a>&nbsp;
         <?php echo '<span class="lite">'.$_SESSION['sort'].'</span>'; ?>
@@ -59,7 +62,7 @@
 
     <!-- file import/export -->
     <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
-        <a href="?action=import" title="Import JSON file to database"><span class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;
+        <!--<a href="?action=import" title="Import JSON file to database"><span class="glyphicon glyphicon-upload"></span></a>&nbsp;&nbsp;-->
         <a href="?action=export" title="Export data in this view as CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
     </div>
 

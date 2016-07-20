@@ -8,7 +8,7 @@
 namespace HackDMC;
 require_once '../app/includes.php';
 
-global $result, $num;
+global $debug, $result, $num;
 $html = '';
 //$count = 0;
 
@@ -30,6 +30,11 @@ $html = '';
  * view
  *
  */
+if($debug){
+    if(!empty($_GET)){echo '<pre>$_GET ';print_r($_GET);echo '</pre>';}
+    if(!empty($_POST)){echo '<pre>$_POST ';print_r($_POST);echo '</pre>';}
+
+}
 require_once '../template/head.php';
 ?>
 <body>

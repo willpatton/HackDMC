@@ -18,10 +18,9 @@ if(1) {
     //
     //*****************
 
-    //LOGOUT
+    //LOGOUT - reset app to known state
     if(isset($_GET['logout']))  {
-        $_SESSION = array();
-        //print_r($_SESSION);
+        logout();
     }
 
     //ACTION
@@ -87,11 +86,11 @@ if(1) {
 
 
     //COMPANY
-    if (!isset($_SESSION['company'])) {
-        $_SESSION['company'] = 'itamco';
+    if (!isset($_SESSION['project'])) {
+        $_SESSION['project'] = $app['project'];
     }
-    if (isset($_GET['company']) && $_GET['company'] !== '') {
-        $_SESSION['company'] = filter_input(INPUT_GET, 'company', FILTER_SANITIZE_STRING);
+    if (isset($_GET['project']) && $_GET['project'] !== '') {
+        $_SESSION['project'] = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_STRING);
     }
 
     //VIEW
