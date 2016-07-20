@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="120cad17-3ff9-4be6-ba59-b4d3144dd2f7" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/data/acme/acme-mconnect-2016.json" afterPath="$PROJECT_DIR$/data/acme/acme-2016.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controller.php" afterPath="$PROJECT_DIR$/app/controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/functions.php" afterPath="$PROJECT_DIR$/app/functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/http.php" afterPath="$PROJECT_DIR$/app/http.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/includes.php" afterPath="$PROJECT_DIR$/app/includes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.php" afterPath="$PROJECT_DIR$/app/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config.php" afterPath="$PROJECT_DIR$/config/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/foot.php" afterPath="$PROJECT_DIR$/template/foot.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/head.php" afterPath="$PROJECT_DIR$/template/head.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/header.php" afterPath="$PROJECT_DIR$/template/header.php" />
     </list>
     <ignored path="HackDMC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="functions.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+            <state relative-caret-position="457">
+              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
               <folding>
                 <element signature="e#6#122#0#PHP" expanded="true" />
                 <element signature="e#3002#5187#0#PHP" expanded="false" />
@@ -121,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+            <state relative-caret-position="106">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -182,10 +172,10 @@
         <option value="$PROJECT_DIR$/app/http.php" />
         <option value="$PROJECT_DIR$/app/includes.php" />
         <option value="$PROJECT_DIR$/template/head.php" />
-        <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/app/index.php" />
         <option value="$PROJECT_DIR$/template/header.php" />
         <option value="$PROJECT_DIR$/app/functions.php" />
+        <option value="$PROJECT_DIR$/config/config.php" />
       </list>
     </option>
   </component>
@@ -403,12 +393,12 @@
       <workItem from="1468652219058" duration="24832000" />
       <workItem from="1468708462873" duration="292000" />
       <workItem from="1468709001275" duration="53442000" />
-      <workItem from="1469026897772" duration="14055000" />
+      <workItem from="1469026897772" duration="14091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105884000" />
+    <option name="totallyTimeSpent" value="105920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="23" width="1344" height="807" extended-state="0" />
@@ -873,14 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -923,14 +905,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+        <state relative-caret-position="457">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
           <folding>
             <element signature="e#6#122#0#PHP" expanded="true" />
             <element signature="e#3002#5187#0#PHP" expanded="false" />
             <marker date="1469044733000" expanded="true" signature="2036:2133" ph="INSERT INTO ${$table}... " />
             <marker date="1469044733000" expanded="true" signature="2490:2502" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

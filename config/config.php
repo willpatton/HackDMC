@@ -18,7 +18,7 @@ date_default_timezone_set('UTC');
 
 //APP
 $loggedin = TRUE;
-$debug = TRUE;  //turns on debugging output
+$debug = FALSE;  //turns on debugging output
 
 $app = array(
     'appname' => 'DMC Analytics',
