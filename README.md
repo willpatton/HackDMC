@@ -8,7 +8,6 @@ This app interprets vast amounts of machine data (collected by MTConnect sensors
 The "intent" of this app is better "decision" making based on "very clear and thoughtful" indicators (i.e. "good vs bad", "yes vs no", "color code: red, yellow, green").  
 Intended users of this app include operators, ops managers and execs for use at the regular ops meetings (daily, weekly, monthly). 
 
-Streaming MTConnect data would provide real-time visibility.
 
 # Participants
 * Will - developer
@@ -23,7 +22,7 @@ Folders
 * /app - the app runs with index.php from this folder
 * /config - 
 * /data - Company, Project data I/O
-* /sql - Database schema. Consists of tables for data, deparmtnes, assets, parts...
+* /sql - Database schema. Consists of tables for data, departments, assets, parts...
 * /template - php templating 
 * /reports - static HTML pages from Connor
 * /docs - PowerPoint from Eric
@@ -39,10 +38,10 @@ JQuery
 * Initialize the database using the .sql in /sql
 
 Data policy
-The .sql schema is structure only (no data).
-2GB JSON of real world MTConnect machine data not included. 
+The .sql schema is contains a sample of data.
+24GB JSON of real world MTConnect machine data not included. 
 
 
 #Unfinished
 * See the TODO in the code
-* Live streaming data feed of MTConnect data
+* Streaming MTConnect data would provide real-time visibility.
