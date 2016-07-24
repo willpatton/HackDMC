@@ -15,10 +15,16 @@ ini_set('display_errors', '1'); //debug
 //ini_set('display_errors', '0'); //production
 date_default_timezone_set('UTC');
 
+/**
+ * IS REMOTE?
+ * @return bool
+ */
+function isRemote(){
+    return FALSE;
+}
 
 //APP
-$loggedin = TRUE;
-$debug = FALSE;  //turns on debugging output
+$debug = FALSE;  //turns on debugging output and hidden features
 
 $app = array(
     'appname' => 'DMC Analytics',
@@ -28,15 +34,24 @@ $app = array(
     'keywords' => 'hackathon, dmc, mtconnect data',
     'canonical' => 'hackdmc.org',
 
+    /*
     'projectname' => 'Acme',
     'project' => 'acme',
-    'projectdomain' => 'acmexxx.com'
+    'projectdomain' => 'acmexxx.com',
+    'apikey' => 'qwertyuiop',
+    */
+
+    'projectname' => 'Itamco',
+    'project' => 'itamco',
+    'projectdomain' => 'itamco.com',
+
+    'apikey' => 'asdfghjkl',
 );
 
 //DEFINES
 define('DATA_DIR', '../data/');
 define('LIMIT_SQL', 1024);
-define('LIMIT_IMPORT', 500);
+define('LIMIT_IMPORT', 1024); //MAX RECORDS IMPORT from JSON file
 
 //FILES & FOLDERS
 define('ROOT_DIR', '../');

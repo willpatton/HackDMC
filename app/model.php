@@ -75,7 +75,9 @@ Array
  */
 $aid = array(
 //    'id' => '999',
-    'machine_id' => rand(500,999),
+//    'id' => 0,
+    'id' => '',
+    'machine_id' => 0, //rand(500,999),
     'category' => 'cat',
     'component' => 'comp',
     'energy' => 'ener',
@@ -86,7 +88,10 @@ $aid = array(
     'begin_dt_tm' => 'tm',
     'mt_name' => 'nm',
     'mt_value' => 'val',
-    'description' => 'desc',
+//    'description' => 'desc',
+    'd0' => '', //department,
+    'd1' => '', //department,
+    'd2' => '', //department,
 //TODO - implement these remaining fields as time/need allow
 //    'block' => '',
 //    'ControllerMode' => '',
@@ -110,11 +115,16 @@ $aid = array(
  * SQL Queries
  *
  */
+//$sql = '';
+
 
 //QUERY - MACHINE GRID - get unique machines for viewing "at-a-glance". Order by most recent timestamp
-if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid') {
-    $sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
-    //$sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
+if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid' ) {  //$_SESSION['tab'] == 'machine'
+    $sql = "SELECT * FROM data ";
+    $sql .= "JOIN machines ON data.machine_id=machines.machine_id ";
+    $sql .= "JOIN departments ON departments.department_id = data.d2 ";
+    $sql .= "GROUP BY data.machine_id ";
+    //$sql .= " WHERE `" .$_SESSION['field']."` LIKE '%".$_SESSION['keyword']. "%' ";
     //$sql .= " AND `category` != 'WorkOrder' ";
     //$sql .= " AND `category` != 'Utilization' ";
     //$sql .= " AND `category` != 'Energy' ";
@@ -122,51 +132,82 @@ if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid') {
     //$sql .= " AND `category` != 'ControllerMode' ";
     //$sql .= " AND `category` != 'Block' ";
     //$sql .= " AND `category` != 'Alarm' ";
-    //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
-    $sql .= "ORDER BY length(`machine_id`), `machine_id`  " .$_SESSION['sort']." ";  //begin_dt_tm  //order by len(registration_no), registration_no
-    $sql .= " LIMIT ".LIMIT_SQL;
+    //$sql .= "ORDER BY " .$_SESSION['field']." " .$_SESSION['sort']." ";
+    //$sql .= "ORDER BY length(data.machine_id), data.machine_id  " .$_SESSION['sort']." ";  //begin_dt_tm  //order by len(registration_no), registration_no
+    $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
+    $sql .= "LIMIT ".LIMIT_SQL;
 }
+
 
 //QUERY - MACHINE LIST - display a list of machine records for a machine (search by keyword)
 if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'list' ){
+    //$sql = "SELECT * FROM " . $table . " ";
+    $sql = "SELECT * FROM data JOIN machines ON data.machine_id=machines.machine_id ";
+    $sql .= "JOIN departments ON departments.department_id = data.d2 ";
+    //$sql .= "GROUP BY data.machine_id ";
+    $sql .= "WHERE data.machine_id LIKE '%".$_SESSION['keyword']. "%' ";
+    //$sql .= "ORDER BY " .$_SESSION['field']." " .$_SESSION['sort']." ";
+      $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
+    //$sql .= "ORDER BY length(data.machine_id), data.machine_id  " .$_SESSION['sort']." ";  //begin_dt_tm  //order by len(registration_no), registration_no
+    $sql .= "LIMIT ".LIMIT_SQL;
+    //$sql .= "LIMIT 1";
+}
+
+
+//QUERY - CATEGORY GRID
+if($_SESSION['tab'] == 'category' ){
+    $sql = "SELECT * FROM data JOIN machines ON data.machine_id=machines.machine_id GROUP BY category  ";
+//    $sql .= "WHERE `category` LIKE '%".$_SESSION['keyword']. "%' ";
+//    $sql .= "AND `alarm_condition` = 'Alarm' ";
+    $sql .= "ORDER BY category  " .$_SESSION['sort']." ";
+    $sql .= "LIMIT ".LIMIT_SQL;
+}
+
+/*
+//QUERY - CATEGORY LIST
+if($_SESSION['tab'] == 'category' && $_SESSION['view'] == 'list'){
     $sql = '';
-    $sql = "SELECT * FROM " . $table . "  ";
-    $sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
-    //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
+    $sql = "SELECT * FROM data JOIN machines ON data.machine_id=machines.machine_id ";
+    //$sql .= "WHERE `" .$_SESSION['field']."` LIKE '%".$_SESSION['keyword']. "%' ";
+    //$sql .= "ORDER BY " .$_SESSION['field']." " .$_SESSION['sort']." ";
     $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
-    $sql .= " LIMIT ".LIMIT_SQL;
-}
+    $sql .= "LIMIT ".LIMIT_SQL;
+}*/
 
-//QUERY - ALARMS - get unique alarms for viewing "at-a-glance".
-if($_SESSION['tab'] == 'alarm' && $_SESSION['view'] == 'grid'){
 
-    $sql = "SELECT * FROM " . $table . " ";
-    $sql .= " WHERE `machine_id` LIKE '%".$_SESSION['keyword']. "%' ";
+//QUERY - ALARMS GRID
+if($_SESSION['tab'] == 'alarm'){
+
+    $sql = "SELECT * FROM data JOIN machines ON data.machine_id=machines.machine_id GROUP BY alarm_condition ";
+    //$sql .= "WHERE `machine_id` LIKE '%".$_SESSION['keyword']. "%' ";
     //$sql = "SELECT * FROM " . $table . " GROUP BY machine_id  ";
-    $sql .= " AND `alarm_condition` = 'Alarm' ";
-    $sql .= "ORDER BY length(`machine_id`), `machine_id`  " .$_SESSION['sort']." ";
-    $sql .= " LIMIT ".LIMIT_SQL;
+    //$sql .= "AND `alarm_condition` = 'Alarm' ";
+    $sql .= "ORDER BY alarm_condition  " .$_SESSION['sort']." ";
+    $sql .= "LIMIT ".LIMIT_SQL;
 }
 
-//QUERY - ALARMS - get unique alarms for viewing "at-a-glance".
+/*
+//QUERY - ALARMS LIST
 if($_SESSION['tab'] == 'alarm' && $_SESSION['view'] == 'list'){
     $sql = '';
-    $sql = "SELECT * FROM " . $table . "  ";
-    $sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
-    //$sql .= "ORDER BY " .$_SESSION['filter']." " .$_SESSION['sort']." ";
+    $sql = "SELECT * FROM " . $table . " ";
+    $sql .= "WHERE `" .$_SESSION['field']."` LIKE '%".$_SESSION['keyword']. "%' ";
+    //$sql .= "ORDER BY " .$_SESSION['field']." " .$_SESSION['sort']." ";
     $sql .= "ORDER BY `begin_dt_tm` " .$_SESSION['sort']." ";
-    $sql .= " LIMIT ".LIMIT_SQL;
+    $sql .= "LIMIT ".LIMIT_SQL;
 }
 
 //QUERY - DEPARTMENT  - display a list of machine records for a machine (search by keyword)
 if($_SESSION['tab'] == 'department'){
     $sql = "SELECT * FROM " . $table . " ";
-    $sql .= " WHERE `" .$_SESSION['filter']."` LIKE '%".$_SESSION['keyword']. "%' ";
-//$sql .= "ORDER BY `" .$_SESSION['filter']." " .$_SESSION['sort']." ";
-    $sql .= " LIMIT ".LIMIT_SQL;
+    $sql .= "WHERE `" .$_SESSION['field']."` LIKE '%".$_SESSION['keyword']. "%' ";
+//$sql .= "ORDER BY `" .$_SESSION['field']." " .$_SESSION['sort']." ";
+    $sql .= "LIMIT ".LIMIT_SQL;
 }
+*/
 
-//QUERY - run the query
+
+//QUERY - RUN the query
 if(isset($sql)) {
     //echo SQL to top of screen if debug enabled
     if ($debug) {
@@ -188,7 +229,8 @@ if(isset($sql)) {
     //print_r($row);
     //exit;
     else {
-        $ar = array('No data, retry');  //blank
+        //blank
+        $ar = array('No data, retry');
     }
 }
 
@@ -197,9 +239,12 @@ if(isset($sql)) {
 if($_SESSION['view'] == 'detail') {
     //$sql = "SELECT * FROM " . $table . " ";
     //$sql .= " WHERE `id` = ".$_SESSION['id']." ";
-    $sql = "SELECT * FROM " . $table . " WHERE id = ".$_SESSION['id']." ";
+    $sql = "SELECT * FROM " . $table . " ";
+    $sql .= "JOIN machines ON data.machine_id=machines.machine_id ";
+    $sql .= "JOIN departments ON departments.department_id = data.d2 ";
+    $sql .= "WHERE id = '".$_SESSION['id']."' ";
     $sql .= "ORDER BY `begin_dt_tm` DESC ";
-    $sql .= " LIMIT 1 ";
+    $sql .= "LIMIT 1 ";
     $result = $db->dbQuery($sql);
     $num = $result->num_rows;
     if ($num) {

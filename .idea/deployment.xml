@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="vagrant">
     <serverData>
+      <paths name="1and1">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="1and1 (hackdmc)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="vagrant">
         <serverdata>
           <mappings>

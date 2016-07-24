@@ -7,9 +7,19 @@
  *
  */
 
+
+
+
 /**
- * LOGOUT - reset app to a known state
- *
+ * LOGGED IN? - is Logged in?
+ * @return bool
+ */
+function isLoggedIn(){
+    return TRUE;
+}
+
+/**
+ * LOGOUT - destroy session and reset app to a known state
  */
 function logout(){
     if (!isset($_SESSION)) {
@@ -30,6 +40,12 @@ function logout(){
     }
 
     session_destroy();
+}
+
+function isChecked($a, $b){
+    if($a == $b){
+        return ' checked ';
+    }
 }
 
 /**
@@ -62,8 +78,12 @@ function render_ar($ar)
  */
 function import_json_to_db($db, $filename)
 {
-    global $table, $msg; //, $lines;
-    $count = 0;
+    global $table, $debug, $msg; //, $lines;
+
+    $start_time = microtime(true);
+
+
+    $count = 1;
 
     $f = fopen($filename, 'r');
 
@@ -77,7 +97,21 @@ function import_json_to_db($db, $filename)
         $fields = '';
         $values = '';
         foreach ($ar as $key => $val) {
-            //TODO - handle nested arrays
+            //handle nested arrays
+            if (is_array($val)){
+               foreach ($val as $key2 => $val2) {
+                   //special case: change from "$oid" to "id"
+                   if($key2 === '$oid'){
+                       $key2 = 'id';
+                   }
+                   //special case = prepend numeric keys with the letter (i.e. "d" for department)
+                   if($key2 == '0' OR $key2 == '1' OR $key2 == '2' ){
+                       $key2 = 'd'.$key2;
+                   }
+                   $fields .= "$key2, ";
+                   $values .= "'$val2', ";
+                }
+            }
             if (!is_array($val)) {
                 $fields .= "$key, ";
                 $values .= "'$val', ";
@@ -88,27 +122,49 @@ function import_json_to_db($db, $filename)
 
         //INSERT
         //$fields = 'machine_id, description';
-        //$values = '270, "Hello World" ';
-        $sql = "INSERT INTO " . $table . ($fields == "" ? "" : " (" . $fields . ")") . " VALUES (" . $values . ")";
+        //$values = '270, "my description text" ';
+        $sql = "INSERT IGNORE INTO " . $table . ($fields == "" ? "" : " (" . $fields . ")") . " VALUES (" . $values . ") ";
         //echo $sql;
 
-        $cresult = $db->dbQuery($sql);
-        if ($cresult) {
+        $result = $db->dbQuery($sql);
+        if ($result) {
             //TRUE - insert was okay
         } else {
             //FALSE - insert had error
         }
 
 
+
+
+        //echo count to screen
+        if($debug && $count % 10000 == 0){
+            echo "$count ";
+        }
+
         //BREAK if too many
         if($count >= LIMIT_IMPORT){
             break;
         }
+
+        //BREAK if too many seconds
+        $stop_time = microtime(true);
+        $diff_time = $stop_time - $start_time;
+        if($diff_time > 29){
+
+            //EXTEND TIME
+            set_time_limit(29);  //RESETS the maximum execution time.
+
+            //BREAK;
+            //break;
+        }
+
+
         $count++;
     }
 
+
     if($count > 0){
-        $msg = '<p style="color:green;">Imported okay: '.$count.' of '.LIMIT_IMPORT.' records. Source file: '.$filename.'</p>'."\n";
+        $msg = '<p style="color:green;">Imported okay: '.$count.' of '.LIMIT_IMPORT.' records in '.$diff_time.' seconds.  Source file: '.$filename.' </p>'."\n";
     }
  }
 

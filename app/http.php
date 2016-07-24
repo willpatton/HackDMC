@@ -28,12 +28,38 @@ if(1) {
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
     }
 
-    //FILTER
-    if (!isset($_SESSION['filter']) OR $_SESSION['filter'] == '') {
-        $_SESSION['filter'] = 'machine_id';
+
+    //FILTER (on/off)
+    if (!isset($_SESSION['filter'])) {
+        $_SESSION['filter'] = 'off';
     }
-    if (isset($_GET['filter']) && $_GET['filter'] !== '') {
-        $_SESSION['filter'] = filter_input(INPUT_GET, 'filter', FILTER_SANITIZE_STRING);
+    if (isset($_GET['filter'])) {
+        if ('off' == $_SESSION['filter']) {
+            $_SESSION['filter'] = 'on';
+        } else {
+            $_SESSION['filter'] = 'off';
+        }
+    }
+
+    //SORT
+    if (!isset($_SESSION['sort'])) {
+        $_SESSION['sort'] = 'ASC';
+    }
+    if (isset($_GET['sort'])) {
+        if ('ASC' == $_SESSION['sort']) {
+            $_SESSION['sort'] = 'DESC';
+        } else {
+            $_SESSION['sort'] = 'ASC';
+        }
+    }
+
+    //SEARCH
+    //FIELD (column in db)
+    if (!isset($_SESSION['field']) OR $_SESSION['field'] == '') {
+        $_SESSION['field'] = 'machine_id';
+    }
+    if (isset($_GET['field']) && $_GET['field'] !== '') {
+        $_SESSION['field'] = filter_input(INPUT_GET, 'field', FILTER_SANITIZE_STRING);
     }
 
     //KEYWORD
@@ -47,18 +73,16 @@ if(1) {
         $_SESSION['keyword'] = filter_input(INPUT_POST, 'keyword', FILTER_SANITIZE_STRING);
     }
 
+    //CLEAR
+    if (isset($_GET['clear'])) {
+        $_SESSION['filter'] = '';
+        $_SESSION['sort'] = '';
+        //$_SESSION['field'] = '';
+        $_SESSION['keyword'] = '';
+    }
 
-    //SORT
-    if (!isset($_SESSION['sort'])) {
-        $_SESSION['sort'] = 'ASC';
-    }
-    if (isset($_GET['sort'])) {
-        if ('ASC' == $_SESSION['sort']) {
-            $_SESSION['sort'] = 'DESC';
-        } else {
-            $_SESSION['sort'] = 'ASC';
-        }
-    }
+
+
 
     //ID
     if(!isset($_SESSION['id'])) {
@@ -77,12 +101,6 @@ if(1) {
         $_SESSION['category_keyword'] = '';
     }
 
-    if (isset($_GET['clear'])) {
-        //$_SESSION['sort'] = filter_input(INPUT_GET,'sort', FILTER_SANITIZE_STRING);
-        $_SESSION['filter'] = '';
-        $_SESSION['keyword'] = '';
-        $_SESSION['sort'] = '';
-    }
 
 
     //COMPANY
@@ -113,6 +131,7 @@ if(1) {
         //$_SESSION['sort'] = '';
     }
 
+    /*
     switch ($_SESSION['tab']) {
         case 'machine': {
             $_SESSION['filter'] = 'machine_id';
@@ -134,7 +153,7 @@ if(1) {
         }
 
     }
-
+*/
 
     //PREVNEXT
     if (!isset($_SESSION['prevnext'])) {

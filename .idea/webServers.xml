@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="641fdd33-3070-4540-be97-c99734c2d57f" name="1and1 (hackdmc)" url="http://74.208.201.147//willpatton.com/hackdmc">
+        <fileTransfer host="74.208.201.147" port="22" rootFolder="/willpatton.com/hackdmc" accessType="SFTP" password="dfe7dfc7dfc3df9bdfcbdfc4dfcedf9bdf8b" username="u37135054">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

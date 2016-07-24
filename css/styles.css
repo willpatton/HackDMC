@@ -15,11 +15,14 @@
 /*display:none;*/
 }
 
+#content {
+    /*padding-bottom:1em;*/
+}
+
 #footer{
 background-color: #ccc;
 color:#666;
 width:100%;
-margin-top:1em;
 padding:.5em;
 padding-left:3em;
 }
