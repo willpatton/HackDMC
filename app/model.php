@@ -118,6 +118,16 @@ $aid = array(
 //$sql = '';
 
 
+if($action == 'deletealldata') {
+    $sql = 'DELETE FROM `data` WHERE 1';
+    $result = $db->dbQuery($sql);
+    //mysqli_free_result($result);//($db);
+    unset($result);
+    unset($sql);
+    $msg = '<p style="color:green;">All data was deleted, okay.</p>';
+}
+
+
 //QUERY - MACHINE GRID - get unique machines for viewing "at-a-glance". Order by most recent timestamp
 if($_SESSION['tab'] == 'machine' && $_SESSION['view'] == 'grid' ) {  //$_SESSION['tab'] == 'machine'
     $sql = "SELECT * FROM data ";
@@ -210,7 +220,7 @@ if($_SESSION['tab'] == 'department'){
 //QUERY - RUN the query
 if(isset($sql)) {
     //echo SQL to top of screen if debug enabled
-    if ($debug) {
+    if (isset($_SESSION['debug'])) {
         echo '<pre style="margin:0;">';
         echo $sql;
         echo '</pre>';
@@ -254,3 +264,4 @@ if($_SESSION['view'] == 'detail') {
     }
 
 }
+

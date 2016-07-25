@@ -2,7 +2,7 @@
 // template/header.php
 ?>
 
-<div id="navtop" class="<?php if(!$debug){echo ' hide ';} ?> hidden-print" style="text-align: right;padding:.2em; padding-right:1em;background-color: #ddd;">
+<div id="navtop" class="<?php if(!isset($_SESSION['debug'])){echo ' hide ';} ?> hidden-print" style="text-align: right;padding:.2em; padding-right:1em;background-color: #ddd;">
     <a href="?project"><?php echo ucfirst($app['project']); ?></a> |
     <a href="?logout">Logout</a> |
     <a href="?tab=settings&page=settings"><span class="glyphicon glyphicon-cog"></span></a>
@@ -69,7 +69,8 @@
     <!-- file import/export -->
     <div class="hidden-print" style="display:inline-block; margin:.5em; font-size:2em;">
         <a href="?action=import" title="Import JSON file to database"><span class="glyphicon glyphicon-upload"></span></a>
-        <a href="?action=export" title="Export data in this view as CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;
+        <a href="?action=export" title="Export data in this view as CSV"><span class="glyphicon glyphicon-download"></span></a>&nbsp;&nbsp;&nbsp;
+        <a href="?tab=settings" title="Settings"><span class="glyphicon glyphicon-cog"></span></a>&nbsp;&nbsp;
     </div>
 
     <!-- search -->

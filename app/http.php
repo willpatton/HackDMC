@@ -14,9 +14,27 @@ if(1) {
 
     //*****************
     //
-    // HTTP GET, POST
+    // HTTP GET, POST, FILES
     //
     //*****************
+
+    //if (!isset($_SESSION['debug'])) {
+    //    $_SESSION['debug'] = '';
+    //}
+    if (isset($_GET['debug'])) {
+        if (!isset($_SESSION['debug'])){
+            $_SESSION['debug'] = 'on';
+        } else {
+            //$_SESSION['debug'] = 'on';
+            if(isset($_SESSION['debug'])) {unset($_SESSION['debug']);}
+        }
+    }
+    /*
+    if(isset($_GET['debug']) && ($_GET['debug'] == 'off' OR strtolower($_GET['debug']) == 'false'))  {
+        if(isset($_SESSION['debug'])) {unset($_SESSION['debug']);}
+        if(isset($_SESSION['debug'])) {unset($debug);}
+    }*/
+
 
     //LOGOUT - reset app to known state
     if(isset($_GET['logout']))  {
@@ -26,6 +44,11 @@ if(1) {
     //ACTION
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    }
+
+    //ACTION
+    if (isset($_FILES['file']) && $_FILES['file'] !== '') {
+        $file = $_FILES['file']; //filter_input(INPUT_FILES, 'file', FILTER_SANITIZE_STRING);
     }
 
 
@@ -82,8 +105,6 @@ if(1) {
     }
 
 
-
-
     //ID
     if(!isset($_SESSION['id'])) {
         $_SESSION['id'] = '';
@@ -109,7 +130,9 @@ if(1) {
     }
     if (isset($_GET['project']) && $_GET['project'] !== '') {
         $_SESSION['project'] = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_STRING);
+
     }
+    $app['project'] = $_SESSION['project'];
 
     //VIEW
     if (!isset($_SESSION['view'])) {

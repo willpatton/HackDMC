@@ -71,17 +71,16 @@ function render_ar($ar)
 
 
 /**
- * IMPORT - initiazlizes a database with data from a JSON file
+ * IMPORT - initializes a database with data from a pseudo JSON file
  * Added LIMIT to control max loop count
  * @param $db
  * @param $filename
  */
-function import_json_to_db($db, $filename)
+function import_json_to_db($db, $filename, $file_size)
 {
     global $table, $debug, $msg; //, $lines;
 
     $start_time = microtime(true);
-
 
     $count = 1;
 
@@ -92,6 +91,15 @@ function import_json_to_db($db, $filename)
         //READ
         $ar = json_decode($buffer, true);
         //print_r($ar);
+
+        if($ar == NULL){
+            $msg = '<p style="color:red;">Import error. File format not compatible (probably). 
+                    Expecting each JSON object to be on one line (pseudo JSON).  
+                    <br>Source file: '.$filename.' </p>'."\n";
+            //break while loop;
+            $count = 0;
+            break;
+        }
 
         //INSERT
         $fields = '';
@@ -113,10 +121,15 @@ function import_json_to_db($db, $filename)
                 }
             }
             if (!is_array($val)) {
+                //special case: keep unwanted values that have a comma out of the db... this impacts formatting of CSV export file
+                if($pos = strpos($val, ',')){
+                    $val = substr($val, 0, $pos);
+                }
                 $fields .= "$key, ";
                 $values .= "'$val', ";
             }
         }
+
         $fields = rtrim($fields, ', ');
         $values = rtrim($values, ', ');
 
@@ -125,7 +138,6 @@ function import_json_to_db($db, $filename)
         //$values = '270, "my description text" ';
         $sql = "INSERT IGNORE INTO " . $table . ($fields == "" ? "" : " (" . $fields . ")") . " VALUES (" . $values . ") ";
         //echo $sql;
-
         $result = $db->dbQuery($sql);
         if ($result) {
             //TRUE - insert was okay
@@ -134,37 +146,36 @@ function import_json_to_db($db, $filename)
         }
 
 
-
-
-        //echo count to screen
-        if($debug && $count % 10000 == 0){
+        //PROGRESS - echo count to screen
+        if(isset($_SESSION['debug']) && $count % 10000 == 0){
             echo "$count ";
         }
 
-        //BREAK if too many
+        //BREAK COUNT - if too many loops
         if($count >= LIMIT_IMPORT){
             break;
         }
 
-        //BREAK if too many seconds
+        //BREAK TIME - if too many seconds
         $stop_time = microtime(true);
         $diff_time = $stop_time - $start_time;
-        if($diff_time > 29){
-
+        if($diff_time < MAX_SCRIPT_SECONDS){
             //EXTEND TIME
             set_time_limit(29);  //RESETS the maximum execution time.
-
+        }
+        if($diff_time > MAX_SCRIPT_SECONDS){
             //BREAK;
-            //break;
+            break;
         }
 
-
+        //loop counter
         $count++;
     }
 
 
     if($count > 0){
-        $msg = '<p style="color:green;">Imported okay: '.$count.' of '.LIMIT_IMPORT.' records in '.$diff_time.' seconds.  Source file: '.$filename.' </p>'."\n";
+        $msg = '<p style="color:green;">Imported okay: '.($count).' of '.LIMIT_IMPORT.' records in '. round($diff_time,3)   .' seconds. '.$file_size.' bytes. 
+        <br>Source file: '.$filename.' </p>'."\n";
     }
  }
 

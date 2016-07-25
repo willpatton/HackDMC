@@ -2,11 +2,20 @@
 .card {
     border:1px solid #ccc;
     padding:0.5em;
-    min-height: 280px;
+    min-height: 300px;
 }
 
 .good{color:green;}
 .bad{color:red;}
+
+/* buttons and controls */
+.cbtn {
+    background-color: #fff;
+    border: 1px solid #428bca;
+    border-radius: 4px;
+    padding: 1px 3px;
+}
+.cbtnglyph {padding-top:3px; }
 
 #is{
 /*display:none;*/

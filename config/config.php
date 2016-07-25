@@ -20,11 +20,14 @@ date_default_timezone_set('UTC');
  * @return bool
  */
 function isRemote(){
+    if($_SERVER['SERVER_NAME'] != 'localhost'){
+        return TRUE;
+    }
     return FALSE;
 }
 
 //APP
-$debug = FALSE;  //turns on debugging output and hidden features
+//$debug = FALSE;  //turns on debugging output and hidden features
 
 $app = array(
     'appname' => 'DMC Analytics',
@@ -44,7 +47,6 @@ $app = array(
     'projectname' => 'Itamco',
     'project' => 'itamco',
     'projectdomain' => 'itamco.com',
-
     'apikey' => 'asdfghjkl',
 );
 
@@ -52,6 +54,8 @@ $app = array(
 define('DATA_DIR', '../data/');
 define('LIMIT_SQL', 1024);
 define('LIMIT_IMPORT', 1024); //MAX RECORDS IMPORT from JSON file
+define('MAX_SCRIPT_SECONDS', 60); //normally 30 seconds
+
 
 //FILES & FOLDERS
 define('ROOT_DIR', '../');

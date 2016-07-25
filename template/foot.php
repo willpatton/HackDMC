@@ -13,7 +13,7 @@
 
 
 <?php
-if($debug){
+if(isset($_SESSION['debug'])){
     echo "<pre>";
     print_r($_SESSION);
     echo "</pre>";
